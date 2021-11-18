@@ -23,43 +23,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _isChecked = false;
+  final _valueList = ['첫번째', '두번째', '세번째'];
+  var _selectedValue = '첫번째';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Checkbox / Radio / Switch")
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Checkbox(
-                value: _isChecked,
-                onChanged: (value) {
-                  setState(() {
-                    _isChecked = value!;
-                  });
-                }
-              ),
-              SizedBox(
-                height: 40
-              ),
-              Switch(
-                value: _isChecked,
-                onChanged: (value) {
-                  setState(() {
-                    _isChecked = value;
-                  });
-                }
-              )
-            ]
-          )
-        ),
-      )
-    );
+        appBar: AppBar(title: Text("Checkbox / Radio / Switch")),
+        body: DropdownButton<String>(
+          value: _selectedValue,
+          items: _valueList.map((value) {
+            return DropdownMenuItem(value: value, child: Text(value));
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              _selectedValue = value!;
+            });
+          },
+        ));
   }
 }
